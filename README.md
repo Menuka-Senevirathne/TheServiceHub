@@ -10,11 +10,8 @@ Built with Flask, SQLAlchemy (SQLite), and designed to be exposed via an API gat
 - [Features](#features)  
 - [Architecture](#architecture)  
 - [Getting Started](#getting-started)  
-- [Usage](#usage)  
 - [API Endpoints](#api-endpoints)  
-- [Database Models](#database-models)  
-- [Contributing](#contributing)  
-- [License](#license)
+- [Sample API Usage](#sample-api-usage)  
 
 ---
 
