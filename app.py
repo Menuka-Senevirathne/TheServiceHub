@@ -78,7 +78,7 @@ def create_appointment():
     }), 201
 
 
-# Get all appointments (optional customer filter)
+# Get all appointments
 @app.route('/appointments', methods=['GET'])
 def get_appointments():
     customer_id = request.args.get('customer_id')
@@ -118,12 +118,21 @@ def get_appointment(appointment_id):
 def update_appointment(appointment_id):
     appointment = Appointment.query.get_or_404(appointment_id)
     data = request.get_json()
+
     if not data or 'status' not in data:
         return error_response('Missing status field in request body', 400)
-    
-    appointment.status = data['status']
+
+    # Allowed statuses
+    allowed_statuses = {'scheduled', 'rejected'}
+    new_status = data['status'].lower()
+
+    if new_status not in allowed_statuses:
+        return error_response(f"Invalid status. Allowed values are: {', '.join(allowed_statuses)}", 400)
+
+    appointment.status = new_status
     db.session.commit()
-    return jsonify({'message': 'Status updated successfully'}), 200
+    return jsonify({'message': 'Status updated successfully', 'status': appointment.status}), 200
+
 
 
 # -------------------- INVOICES -------------------- #
@@ -159,7 +168,7 @@ def upload_invoice():
         total_cost=total_cost,
         filename=filename,
         upload_path=filepath,
-        status='darfted'  # explicitly set default
+        status='darfted'  
     )
     db.session.add(invoice)
     db.session.commit()
