@@ -22,7 +22,7 @@ Built with Flask, SQLAlchemy (SQLite), and designed to be exposed via an API gat
 
 - Create, list, and update **appointments** (vehicle service jobs).  
 - Upload, retrieve, and manage **invoices** (PDFs).  
-- Auto‑generated unique integer IDs for both appointments and invoices (clients do *not* send IDs).  
+- Auto‑generated unique integer IDs for both appointments and invoices.  
 - Status lifecycle for invoices (“draft” → “approved” / “rejected”).  
 - Ready for API gateway fronting (JWT authentication, routing via WSO2 APIM, etc.).  
 - Seed script to populate sample data for quick local testing.
@@ -85,7 +85,7 @@ Here’s a summary of the endpoints (base URL `http://127.0.0.1:5001`):
 
 | Method | Path                | Description                            |
 |--------|--------------------|----------------------------------------|
-| POST   | `/invoices`        | Upload a PDF invoice (multipart)       |
+| POST   | `/invoices`        | Upload a PDF invoice      |
 | GET    | `/invoices`        | List all invoices                       |
 | GET    | `/invoices/{id}`   | Retrieve specific invoice               |
 | PATCH  | `/invoices/{id}`   | Update status (`approved`, `rejected`)     |
